@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Garden | Authentic Indian Flavours, Bengaluru</title>
+    <meta name="description"
+        content="Food Garden — Authentic Indian cuisine rooted in tradition, grown with organic care. Dine in Ashok Nagar, Bengaluru.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FDFBF7;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+
+        /* ════════════════════════════════
+           HERO
+        ════════════════════════════════ */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 640px;
+            background: linear-gradient(160deg, rgba(5, 18, 5, .92), rgba(90, 40, 0, .65)),
+                url('assets/images/home.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* animated grain overlay */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: .5;
+        }
+
+        /* curved bottom wave */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background: #FDFBF7;
+            clip-path: ellipse(55% 100% at 50% 100%);
+            z-index: 1;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            padding: 0 8%;
+            max-width: 760px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 192, 45, .15);
+            border: 1px solid rgba(251, 192, 45, .5);
+            color: #FBC02D;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 7px 20px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+        }
+
+        .hero-inner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 22px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+        }
+
+        .hero-inner h1 em {
+            font-style: italic;
+            color: #FBC02D;
+        }
+
+        .hero-inner p {
+            font-size: 1.1rem;
+            opacity: .80;
+            line-height: 1.8;
+            margin-bottom: 38px;
+            max-width: 520px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hbtn-primary {
+            padding: 15px 34px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hbtn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, .45);
+        }
+
+        .hbtn-ghost {
+            padding: 15px 34px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, .45);
+            color: #fff;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hbtn-ghost:hover {
+            background: rgba(255, 255, 255, .12);
+            border-color: rgba(255, 255, 255, .6);
+        }
+
+        /* Scroll cue */
+        .scroll-arrow {
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            color: rgba(255, 255, 255, .55);
+            font-size: .72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-arrow i {
+            display: block;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px)
+            }
+        }
+
+        /* Floating rating card */
+        .hero-rating {
+            position: absolute;
+            bottom: 140px;
+            right: 8%;
+            z-index: 2;
+            background: rgba(255, 255, 255, .1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 20px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #fff;
+        }
+
+        .rating-avatars {
+            display: flex;
+        }
+
+        .rating-avatars img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, .3);
+            object-fit: cover;
+            margin-left: -8px;
+        }
+
+        .rating-avatars img:first-child {
+            margin-left: 0;
+        }
+
+        .rating-info p {
+            font-size: .8rem;
+            opacity: .75;
+        }
+
+        .rating-info strong {
+            font-size: 1rem;
+            color: #FBC02D;
+        }
+
+        .stars-sm {
+            color: #FBC02D;
+            font-size: .7rem;
+        }
+
+        /* ════════════════════════════════
+           TRUST STRIP
+        ════════════════════════════════ */
+        .trust-strip {
+            background: #2D5A27;
+            color: #fff;
+            padding: 24px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .88rem;
+            font-weight: 500;
+        }
+
+        .trust-item i {
+            font-size: 1.1rem;
+            color: #FBC02D;
+        }
+
+        /* ════════════════════════════════
+           FEATURED DISHES
+        ════════════════════════════════ */
+        .featured {
+            padding: 100px 5%;
+        }
+
+        .sec-head {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .sec-head h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #2D5A27;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .sec-head h2::after {
+            content: '';
+            display: block;
+            width: 55%;
+            height: 3px;
+            background: linear-gradient(90deg, #FBC02D, transparent);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .sec-head p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .sec-head .sec-badge {
+            display: inline-block;
+            background: rgba(45, 90, 39, .08);
+            color: #2D5A27;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .dish-card-home {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
+            transition: transform .3s ease, box-shadow .3s ease;
+            position: relative;
+        }
+
+        .dish-card-home:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, .14);
+        }
+
+        .dc-img {
+            height: 230px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dc-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s;
+        }
+
+        .dish-card-home:hover .dc-img img {
+            transform: scale(1.08);
+        }
+
+        .dc-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #FBC02D;
+            color: #1A1A1A;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .dc-body {
+            padding: 24px;
+        }
+
+        .dc-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #1A1A1A;
+            margin-bottom: 7px;
+        }
+
+        .dc-body p {
+            font-size: .875rem;
+            color: #888;
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
+
+        .dc-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dc-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2D5A27;
+        }
+
+        .dc-order {
+            display: none !important;
+        }
+
+        .dc-order:hover {
+            display: none !important;
+        }
+
+        .see-all-wrap {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .see-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            border-radius: 50px;
+            border: 2px solid #2D5A27;
+            color: #2D5A27;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .see-all-btn:hover {
+            background: #2D5A27;
+            color: #fff;
+        }
+
+        /* ════════════════════════════════
+           EXPERIENCE SPLIT
+        ════════════════════════════════ */
+        .experience {
+            background: linear-gradient(135deg, #1A1A1A, #2D3A2A);
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            color: #fff;
+        }
+
+        .exp-imgs {
+            position: relative;
+        }
+
+        .exp-imgs .img-big {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+        }
+
+        .exp-imgs .img-small {
+            position: absolute;
+            bottom: -28px;
+            right: -28px;
+            width: 190px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 5px solid #1A1A1A;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+        }
+
+        .exp-badge-circle {
+            position: absolute;
+            top: -18px;
+            left: -18px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #FBC02D, #D4A017);
+            color: #1A1A1A;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: .78rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(251, 192, 45, .5);
+        }
+
+        .exp-badge-circle span {
+            font-size: 1.5rem;
+            font-weight: 900;
+            display: block;
+        }
+
+        .exp-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #FBC02D;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .exp-text p {
+            color: #aaa;
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .exp-feats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .exp-feat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            padding: 13px 16px;
+            font-size: .88rem;
+            font-weight: 500;
+            transition: all .3s;
+        }
+
+        .exp-feat:hover {
+            background: rgba(251, 192, 45, .08);
+            border-color: rgba(251, 192, 45, .25);
+        }
+
+        .exp-feat i {
+            color: #FBC02D;
+        }
+
+        .exp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .exp-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, .45);
+        }
+
+        /* ════════════════════════════════
+           HOURS & LOCATION
+        ════════════════════════════════ */
+        .visit-section {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .visit-hours {
+            background: #fff;
+            border-radius: 28px;
+            padding: 45px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .07);
+        }
+
+        .visit-hours h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #2D5A27;
+            margin-bottom: 6px;
+        }
+
+        .visit-hours>p {
+            color: #888;
+            font-size: .92rem;
+            margin-bottom: 30px;
+        }
+
+        .hr-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px dashed #f0e8d8;
+            font-size: .9rem;
+        }
+
+        .hr-row:last-child {
+            border-bottom: none;
+        }
+
+        .hr-row span:first-child {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .hr-row span:last-child {
+            color: #2D5A27;
+            font-weight: 700;
+        }
+
+        .visit-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .vi-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 28px 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .07);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all .3s;
+        }
+
+        .vi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .12);
+        }
+
+        .vi-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .vi-green {
+            background: rgba(45, 90, 39, .1);
+            color: #2D5A27;
+        }
+
+        .vi-gold {
+            background: rgba(251, 192, 45, .12);
+            color: #D4A017;
+        }
+
+        .vi-orange {
+            background: rgba(212, 123, 58, .12);
+            color: #D47B3A;
+        }
+
+        .vi-txt h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .vi-txt p {
+            font-size: .85rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .vi-txt a {
+            color: #2D5A27;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* ════════════════════════════════
+           TESTIMONIALS
+        ════════════════════════════════ */
+        .reviews-section {
+            padding: 100px 5%;
+            background: #fff;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .review-card {
+            background: #FDFBF7;
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, .06);
+            border-left: 4px solid #FBC02D;
+            transition: all .3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .11);
+        }
+
+        .review-stars {
+            color: #FBC02D;
+            font-size: .85rem;
+            margin-bottom: 14px;
+        }
+
+        .review-text {
+            font-size: .93rem;
+            color: #555;
+            line-height: 1.75;
+            font-style: italic;
+            margin-bottom: 22px;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: .78rem;
+            color: #aaa;
+        }
+
+        /* ════════════════════════════════
+           INSTAGRAM GALLERY
+        ════════════════════════════════ */
+        .ig-section {
+            padding: 100px 5% 80px;
+            background: #fff;
+        }
+
+        .ig-section .sec-head {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .ig-section .sec-head h2 {
+            font-size: 2.5rem;
+            color: #2D5A27;
+        }
+
+        .ig-follow-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: #1A1A1A;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .ig-follow-btn:hover {
+            background: #2D5A27;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(45, 90, 39, 0.2);
+        }
+
+        .ig-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ig-item {
+            position: relative;
+            height: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .ig-item:nth-child(n) {
+            top: auto;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            transform: none;
+            width: auto;
+        }
+
+        .ig-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .ig-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .ig-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .ig-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 90, 39, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ig-item:hover .ig-overlay {
+            opacity: 1;
+        }
+
+        .ig-overlay i {
+            font-size: 1.8rem;
+        }
+
+        /* Hide interaction helpers in this clean layout */
+        .ig-tag {
+            display: none;
+        }
+
+        .ig-overlay span {
+            display: none;
+        }
+
+        /* ════════════════════════════════
+           NEWSLETTER / CTA banner
+        ════════════════════════════════ */
+        .home-cta {
+            margin: 0 5% 80px;
+            background: linear-gradient(135deg, #2D5A27, #1A3A18);
+            border-radius: 30px;
+            padding: 70px 60px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .home-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #FBC02D;
+            margin-bottom: 10px;
+        }
+
+        .home-cta p {
+            color: rgba(255, 255, 255, .7);
+            font-size: .95rem;
+            max-width: 480px;
+            line-height: 1.8;
+        }
+
+        .cta-right {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .cta-btn-w {
+            padding: 16px 38px;
+            background: #fff;
+            color: #2D5A27;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-btn-w:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+        }
+
+        .cta-btn-g {
+            padding: 15px 38px;
+            border: 2px solid rgba(255, 255, 255, .3);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-btn-g:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        /* ════════════════════════════════
+           RESPONSIVE
+        ════════════════════════════════ */
+        @media(max-width:1024px) {
+            .experience {
+                grid-template-columns: 1fr;
+            }
+
+            .exp-imgs {
+                order: 2;
+            }
+
+            .exp-imgs .img-small {
+                display: none;
+            }
+
+            .home-cta {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .home-cta p {
+                margin: 0 auto;
+            }
+
+            .cta-right {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media(max-width:900px) {
+            .dishes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .visit-section {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-strip {
+                gap: 30px;
+            }
+
+            .ig-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-rating {
+                display: none;
+            }
+        }
+
+        @media(max-width:600px) {
+            .dishes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ig-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .home-cta {
+                padding: 45px 30px;
+            }
+
+            .exp-feats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAV ─────────────────────────────────── -->
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">Food Garden</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reserve.html" class="btn btn-primary" style="padding:10px 20px;">Book a Table</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <!-- ── HERO ────────────────────────────────── -->
+    <section class="hero-section">
+        <div class="hero-inner">
+
+            <h1>Where <em>India's Flavours</em><br>Come Alive</h1>
+            <p>Authentic regional Indian cuisine grown from our own organic garden — every dish is a story of heritage,
+                spice, and love.</p>
+            <div class="hero-ctas">
+                <a href="menu.html" class="hbtn-primary"><i class="fas fa-utensils"></i> Explore Menu</a>
+                <a href="reserve.html" class="hbtn-ghost"><i class="fas fa-calendar-alt"></i> Book a Table</a>
+            </div>
+        </div>
+
+        <!-- Floating rating card -->
+        <div class="hero-rating">
+            <div class="rating-avatars">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+            </div>
+            <div class="rating-info">
+                <div class="stars-sm">★★★★★</div>
+                <strong>4.9 / 5</strong>
+                <p>2,000+ happy guests</p>
+            </div>
+        </div>
+
+        <div class="scroll-arrow">Scroll <i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- ── TRUST STRIP ──────────────────────────── -->
+    <div class="trust-strip">
+        <div class="trust-item"><i class="fas fa-seedling"></i> 100% Organic Garden</div>
+        <div class="trust-item"><i class="fas fa-fire-alt"></i> Wood-fire Tandoor</div>
+        <div class="trust-item"><i class="fas fa-award"></i> Award-Winning Kitchen</div>
+        <div class="trust-item"><i class="fas fa-map-marker-alt"></i> Ashok Nagar, Bengaluru</div>
+    </div>
+
+    <!-- ── FEATURED DISHES ─────────────────────── -->
+    <section class="featured">
+        <div class="sec-head">
+            <div class="sec-badge">🍽 Signature Dishes</div>
+            <h2>Our Signature Indian Delicacies</h2>
+            <p>Traditional recipes crafted with fresh, organic garden ingredients.</p>
+        </div>
+        <div class="dishes-grid">
+            <div class="dish-card-home">
+                <div class="dc-img">
+                    <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&q=80&w=700"
+                        alt="Paneer Tikka">
+                    <span class="dc-tag">⭐ Chef's Pick</span>
+                </div>
+                <div class="dc-body">
+                    <h3>Garden Fresh Paneer Tikka</h3>
+                    <p>Organic cottage cheese marinated in home-grown spices and coal-fired to smoky perfection in our
+                        tandoor.</p>
+                    <div class="dc-footer">
+                        <span class="dc-price">₹450</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dish-card-home">
+                <div class="dc-img">
+                    <img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&q=80&w=700"
+                        alt="Butter Chicken">
+                    <span class="dc-tag">🔥 Bestseller</span>
+                </div>
+                <div class="dc-body">
+                    <h3>Old Delhi Butter Chicken</h3>
+                    <p>Tender chicken in a velvety tomato-cream gravy with a fragrant hint of fresh garden fenugreek.
+                    </p>
+                    <div class="dc-footer">
+                        <span class="dc-price">₹580</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dish-card-home">
+                <div class="dc-img">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=700"
+                        alt="Biryani">
+                    <span class="dc-tag">✨ New Season</span>
+                </div>
+                <div class="dc-body">
+                    <h3>Garden Signature Biryani</h3>
+                    <p>Fragrant basmati rice layered with saffron, seasonal garden vegetables and aromatic whole spices.
+                    </p>
+                    <div class="dc-footer">
+                        <span class="dc-price">₹520</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="see-all-wrap">
+            <a href="menu.html" class="see-all-btn">View Full Menu &nbsp;<i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ── EXPERIENCE SPLIT ────────────────────── -->
+    <section class="experience">
+        <div class="exp-imgs">
+            <div class="exp-badge-circle"><span>🌿</span>Organic<br>Garden</div>
+            <img class="img-big"
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800"
+                alt="Our Space">
+            <img class="img-small"
+                src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=400"
+                alt="Spices">
+        </div>
+        <div class="exp-text">
+            <h2>An Experience Beyond the Plate</h2>
+            <p>At Food Garden, dining is an immersive journey — from the crackling sound of our clay tandoor to the
+                fragrance of freshly ground masalas drifting through the garden terrace.</p>
+            <div class="exp-feats">
+                <div class="exp-feat"><i class="fas fa-mortar-pestle"></i> Daily fresh-ground masalas</div>
+                <div class="exp-feat"><i class="fas fa-fire-alt"></i> Wood-fire tandoor cooking</div>
+                <div class="exp-feat"><i class="fas fa-chair"></i> Garden & indoor seating</div>
+                <div class="exp-feat"><i class="fas fa-glass-cheers"></i> Private dining available</div>
+            </div>
+            <a href="about.html" class="exp-link"><i class="fas fa-book-open"></i> &nbsp;Our Full Story</a>
+        </div>
+    </section>
+
+    <!-- ── VISIT US ────────────────────────────── -->
+    <section class="visit-section">
+        <div class="visit-hours">
+            <h3>Opening Hours</h3>
+            <p>Walk-ins welcome every day of the week.</p>
+            <div class="hr-row"><span>Monday – Friday</span><span>11:00 AM – 10:30 PM</span></div>
+            <div class="hr-row"><span>Saturday</span><span>10:00 AM – 11:00 PM</span></div>
+            <div class="hr-row"><span>Sunday</span><span>10:00 AM – 11:00 PM</span></div>
+            <div class="hr-row"><span>Public Holidays</span><span>12:00 PM – 9:00 PM</span></div>
+        </div>
+        <div class="visit-info">
+            <div class="vi-card">
+                <div class="vi-icon vi-green"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="vi-txt">
+                    <h4>Find Us</h4>
+                    <p>17, Lavelle Road<br>Ashok Nagar, Bengaluru 560001</p>
+                </div>
+            </div>
+            <div class="vi-card">
+                <div class="vi-icon vi-gold"><i class="fas fa-phone-alt"></i></div>
+                <div class="vi-txt">
+                    <h4>Call Us</h4>
+                    <p><a href="tel:+918035216789">+91 80 3521 6789</a><br>Available during opening hours</p>
+                </div>
+            </div>
+            <div class="vi-card">
+                <div class="vi-icon vi-orange"><i class="fas fa-envelope"></i></div>
+                <div class="vi-txt">
+                    <h4>Email Us</h4>
+                    <p><a href="mailto:hello@foodgarden.in">hello@foodgarden.in</a><br>We respond within 24 hours
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── REVIEWS ────────────────────────────── -->
+    <section class="reviews-section">
+        <div class="sec-head">
+            <div class="sec-badge">💬 Guest Reviews</div>
+            <h2>What Our Guests Say</h2>
+            <p>Over 2,000 happy diners and counting.</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"The Dal Makhani is honestly the best I've had outside of my grandmother's
+                    kitchen. The slow-cooked depth of flavour is extraordinary."</p>
+                <div class="review-author">
+                    <img class="author-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya">
+                    <div class="author-info">
+                        <h4>Priya Menon</h4>
+                        <p>Regular Guest · Bengaluru</p>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"The garden seating is magical at night. Celebrated my anniversary here — Chef
+                    Arjun personally came out to greet us. Unforgettable!"</p>
+                <div class="review-author">
+                    <img class="author-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul">
+                    <div class="author-info">
+                        <h4>Rahul & Sneha Agarwal</h4>
+                        <p>Anniversary Celebration</p>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Fresh, authentic, and beautifully presented. The Paneer Tikka and Butter Naan
+                    combo is a must-order. Will be back every weekend!"</p>
+                <div class="review-author">
+                    <img class="author-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya">
+                    <div class="author-info">
+                        <h4>Ananya Krishnan</h4>
+                        <p>Food Blogger · 3.2k followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── INSTAGRAM GALLERY ───────────────────── -->
+    <section class="ig-section">
+        <div class="sec-head">
+            <div class="sec-badge">📸 @FoodGardenLife</div>
+            <h2>Behind the Scenes</h2>
+            <p>From the garden to your table. Follow our daily journey.</p>
+            <a href="#" class="ig-follow-btn"><i class="fab fa-instagram"></i> Follow Us</a>
+        </div>
+        <div class="ig-grid">
+            <div class="ig-item"><img src="./assets/images/generated/samosa.png" alt="Garden Dish">
+                <div class="ig-overlay"><i class="fab fa-instagram"></i></div>
+            </div>
+            <div class="ig-item"><img src="./assets/images/generated/dal_makhani.png" alt="Dal Makhani">
+                <div class="ig-overlay"><i class="fab fa-instagram"></i></div>
+            </div>
+            <div class="ig-item"><img src="./assets/images/generated/interior.png" alt="Ambiance">
+                <div class="ig-overlay"><i class="fab fa-instagram"></i></div>
+            </div>
+            <div class="ig-item"><img src="./assets/images/generated/gulab_jamun.png" alt="Dessert">
+                <div class="ig-overlay"><i class="fab fa-instagram"></i></div>
+            </div>
+            <div class="ig-item"><img src="./assets/images/generated/paneer_tikka.png" alt="Paneer Tikka">
+                <div class="ig-overlay"><i class="fab fa-instagram"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FINAL CTA ───────────────────────────── -->
+    <div class="home-cta">
+        <div>
+            <h2>Ready for an Unforgettable Evening?</h2>
+            <p>Book your table today and let us take you on a culinary journey through the very best of India — fresh,
+                festive, and full of heart.</p>
+        </div>
+        <div class="cta-right">
+            <a href="reserve.html" class="cta-btn-w"><i class="fas fa-calendar-check"></i> Book a Table</a>
+            <a href="menu.html" class="cta-btn-g"><i class="fas fa-utensils"></i> Explore Menu</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

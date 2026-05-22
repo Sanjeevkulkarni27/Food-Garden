@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Garden — Admin Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Admin Styles -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         LOGIN SCREEN
+         ══════════════════════════════════════════════════════════════ -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h1>Food Garden</h1>
+                <p>Admin Dashboard</p>
+            </div>
+
+            <form id="loginForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="loginUsername">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <input type="text" id="loginUsername" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-wrapper">
+                        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="loginError" class="login-error" style="display:none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span></span>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span>Sign In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <i class="fas fa-shield-halved"></i> Secure admin access only
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DASHBOARD (hidden initially)
+         ══════════════════════════════════════════════════════════════ -->
+    <div id="dashboard" class="dashboard" style="display:none;">
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Food Garden</span>
+                </div>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="#" class="nav-item active" data-tab="dashboardTab">
+                            <i class="fas fa-grid-2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-tab="reservationsTab">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Reservations</span>
+                            <span class="nav-badge" id="reservationsBadge" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-tab="messagesTab">
+                            <i class="fas fa-envelope"></i>
+                            <span>Messages</span>
+                            <span class="nav-badge" id="messagesBadge" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-tab="menuTab">
+                            <i class="fas fa-utensils"></i>
+                            <span>Menu</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ── MAIN CONTENT ── -->
+        <main class="main-content">
+
+            <!-- Top Header Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="hamburger" id="hamburgerBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="top-bar-right">
+                    <div class="admin-greeting">
+                        <span>Welcome back,</span>
+                        <strong id="adminName">Admin</strong>
+                    </div>
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-area">
+
+                <!-- ─── DASHBOARD TAB ─── -->
+                <section id="dashboardTab" class="tab-content active">
+                    <div class="stats-grid">
+                        <div class="stat-card" data-accent="gold">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="todayReservations">0</h3>
+                                <p>Today's Reservations</p>
+                            </div>
+                            <div class="stat-trend">
+                                <i class="fas fa-arrow-trend-up"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-accent="green">
+                            <div class="stat-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalReservations">0</h3>
+                                <p>Total Reservations</p>
+                            </div>
+                            <div class="stat-trend">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-accent="orange">
+                            <div class="stat-icon">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="unreadMessages">0</h3>
+                                <p>Unread Messages</p>
+                            </div>
+                            <div class="stat-trend">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-accent="purple">
+                            <div class="stat-icon">
+                                <i class="fas fa-bowl-food"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="menuItemsCount">0</h3>
+                                <p>Menu Items</p>
+                            </div>
+                            <div class="stat-trend">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Reservations Mini-Table -->
+                    <div class="card-section">
+                        <div class="card-section-header">
+                            <h3><i class="fas fa-clock-rotate-left"></i> Recent Reservations</h3>
+                            <a href="#" class="view-all-link" data-tab="reservationsTab">
+                                View All <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="data-table mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Guest</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Guests</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentReservationsBody">
+                                    <tr>
+                                        <td colspan="5" class="empty-state">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- ─── RESERVATIONS TAB ─── -->
+                <section id="reservationsTab" class="tab-content">
+                    <div class="tab-toolbar">
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-layer-group"></i> All
+                            </button>
+                            <button class="filter-btn" data-filter="pending">
+                                <i class="fas fa-hourglass-half"></i> Pending
+                            </button>
+                            <button class="filter-btn" data-filter="confirmed">
+                                <i class="fas fa-check-circle"></i> Confirmed
+                            </button>
+                            <button class="filter-btn" data-filter="cancelled">
+                                <i class="fas fa-times-circle"></i> Cancelled
+                            </button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button class="refresh-btn" onclick="loadReservations()">
+                                <i class="fas fa-arrows-rotate"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="data-table full-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Guests</th>
+                                    <th>Seating</th>
+                                    <th>Occasion</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationsBody">
+                                <tr>
+                                    <td colspan="8" class="empty-state">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading reservations...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+                <!-- ─── MESSAGES TAB ─── -->
+                <section id="messagesTab" class="tab-content">
+                    <div class="tab-toolbar">
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-layer-group"></i> All
+                            </button>
+                            <button class="filter-btn" data-filter="unread">
+                                <i class="fas fa-envelope"></i> Unread
+                            </button>
+                            <button class="filter-btn" data-filter="read">
+                                <i class="fas fa-envelope-open"></i> Read
+                            </button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button class="refresh-btn" onclick="loadMessages()">
+                                <i class="fas fa-arrows-rotate"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="messages-grid" id="messagesGrid">
+                        <div class="empty-state-card">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading messages...</p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- ─── MENU TAB ─── -->
+                <section id="menuTab" class="tab-content">
+                    <div class="tab-toolbar">
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-layer-group"></i> All
+                            </button>
+                            <button class="filter-btn" data-filter="starters">
+                                <i class="fas fa-seedling"></i> Starters
+                            </button>
+                            <button class="filter-btn" data-filter="mains">
+                                <i class="fas fa-plate-wheat"></i> Mains
+                            </button>
+                            <button class="filter-btn" data-filter="desserts">
+                                <i class="fas fa-ice-cream"></i> Desserts
+                            </button>
+                            <button class="filter-btn" data-filter="beverages">
+                                <i class="fas fa-mug-hot"></i> Beverages
+                            </button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button class="add-btn" onclick="openMenuModal()">
+                                <i class="fas fa-plus"></i> Add New Item
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-grid" id="menuGrid">
+                        <div class="empty-state-card">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading menu items...</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         MENU ITEM MODAL
+         ══════════════════════════════════════════════════════════════ -->
+    <div id="menuModal" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="menuModalTitle">
+                    <i class="fas fa-plus-circle"></i> Add Menu Item
+                </h3>
+                <button class="modal-close" onclick="closeMenuModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="menuForm" class="modal-form">
+                <input type="hidden" id="menuItemId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="menuName">Item Name</label>
+                        <input type="text" id="menuName" placeholder="e.g. Paneer Tikka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuCategory">Category</label>
+                        <select id="menuCategory" required>
+                            <option value="">Select category</option>
+                            <option value="starters">Starters</option>
+                            <option value="mains">Mains</option>
+                            <option value="tandoor">Tandoor & Breads</option>
+                            <option value="desserts">Desserts</option>
+                            <option value="beverages">Beverages</option>
+                            <option value="specials">Specials</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="menuDescription">Description</label>
+                    <textarea id="menuDescription" rows="3" placeholder="A short description of the dish..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="menuPrice">Price (₹)</label>
+                        <input type="number" id="menuPrice" placeholder="299" min="0" step="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuImage">Image URL</label>
+                        <input type="url" id="menuImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Badges</label>
+                    <div class="badge-checkboxes">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="badgeVeg" value="veg">
+                            <span class="custom-checkbox"><i class="fas fa-check"></i></span>
+                            <span>🌿 Vegetarian</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="badgeSpicy" value="spicy">
+                            <span class="custom-checkbox"><i class="fas fa-check"></i></span>
+                            <span>🌶️ Spicy</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="badgeChef" value="chef-special">
+                            <span class="custom-checkbox"><i class="fas fa-check"></i></span>
+                            <span>👨‍🍳 Chef's Special</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="badgeNew" value="new">
+                            <span class="custom-checkbox"><i class="fas fa-check"></i></span>
+                            <span>✨ New</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Availability</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="menuAvailable" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Available</span>
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeMenuModal()">Cancel</button>
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-check"></i> Save Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         TOAST NOTIFICATION
+         ══════════════════════════════════════════════════════════════ -->
+    <div id="toastContainer" class="toast-container"></div>
+
+
+    <!-- Admin JS -->
+    <script src="js/admin.js"></script>
+</body>
+</html>

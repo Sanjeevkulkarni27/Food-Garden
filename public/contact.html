@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Food Garden</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* ── Hero ─────────────────────────────────── */
+        .contact-hero {
+            position: relative;
+            height: 55vh;
+            background: linear-gradient(160deg, rgba(10, 20, 10, 0.88), rgba(50, 100, 40, 0.60)),
+                url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 70%, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 192, 45, 0.15);
+            border: 1px solid rgba(251, 192, 45, 0.45);
+            color: #FBC02D;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .contact-hero p {
+            font-size: 1.05rem;
+            opacity: .82;
+            max-width: 520px;
+        }
+
+        /* ── Info Cards Row ────────────────────────── */
+        .info-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: -60px auto 0;
+            padding: 0 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            transition: transform .3s ease, box-shadow .3s ease;
+            cursor: default;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .info-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto 18px;
+        }
+
+        .icon-green {
+            background: rgba(45, 90, 39, 0.1);
+            color: #2D5A27;
+        }
+
+        .icon-gold {
+            background: rgba(251, 192, 45, 0.12);
+            color: #D4A017;
+        }
+
+        .icon-orange {
+            background: rgba(212, 123, 58, 0.12);
+            color: #D47B3A;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            font-size: .9rem;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        .info-card a {
+            color: #2D5A27;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .contact-main {
+            max-width: 1100px;
+            margin: 70px auto 0;
+            padding: 0 5% 100px;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Hours + Social left column */
+        .contact-sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .contact-sidebar>p {
+            color: #888;
+            font-size: .95rem;
+            margin-bottom: 36px;
+        }
+
+        /* Hours card */
+        .hours-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+            margin-bottom: 28px;
+        }
+
+        .hours-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hours-card h4 i {
+            color: #2D5A27;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #f0ebe3;
+            font-size: .9rem;
+        }
+
+        .hour-row:last-child {
+            border-bottom: none;
+        }
+
+        .hour-row span:first-child {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .hour-row span:last-child {
+            color: #2D5A27;
+            font-weight: 700;
+        }
+
+        .hour-row .closed {
+            color: #e55;
+        }
+
+        /* Social card */
+        .social-card {
+            background: linear-gradient(135deg, #1a1a1a, #2D3A2A);
+            border-radius: 22px;
+            padding: 32px;
+            color: #fff;
+        }
+
+        .social-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #FBC02D;
+        }
+
+        .social-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: .85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .25s;
+        }
+
+        .social-btn:hover {
+            background: rgba(251, 192, 45, 0.15);
+            border-color: rgba(251, 192, 45, 0.4);
+            color: #FBC02D;
+        }
+
+        /* ── Contact Form ──────────────────────────── */
+        .contact-form-wrap {
+            background: #fff;
+            border-radius: 28px;
+            padding: 48px 44px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.09);
+        }
+
+        .form-head h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1A1A1A;
+            margin-bottom: 6px;
+        }
+
+        .form-head p {
+            color: #888;
+            font-size: .9rem;
+            margin-bottom: 32px;
+        }
+
+        .cform-group {
+            margin-bottom: 20px;
+        }
+
+        .cform-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .83rem;
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .cform-group label i {
+            color: #2D5A27;
+        }
+
+        .cform-group input,
+        .cform-group select,
+        .cform-group textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #e8e0d5;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: .95rem;
+            color: #1A1A1A;
+            background: #fdfbf8;
+            outline: none;
+            transition: border-color .25s, box-shadow .25s;
+        }
+
+        .cform-group input:focus,
+        .cform-group select:focus,
+        .cform-group textarea:focus {
+            border-color: #2D5A27;
+            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.1);
+            background: #fff;
+        }
+
+        .cform-group textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        .cform-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Topic pills */
+        .topic-wrap {
+            margin-bottom: 20px;
+        }
+
+        .topic-label {
+            font-size: .83rem;
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .topic-label i {
+            color: #2D5A27;
+        }
+
+        .topic-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .topic-pill {
+            padding: 7px 16px;
+            border: 1.5px solid #e8e0d5;
+            border-radius: 50px;
+            font-size: .82rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            background: #fdfbf8;
+            transition: all .2s;
+            user-select: none;
+        }
+
+        .topic-pill:hover,
+        .topic-pill.active {
+            background: #2D5A27;
+            border-color: #2D5A27;
+            color: #fff;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all .3s;
+            margin-top: 6px;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, 0.35);
+        }
+
+        /* ── Map ───────────────────────────────────── */
+        .map-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5% 100px;
+        }
+
+        .map-wrap h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .map-wrap p {
+            color: #888;
+            font-size: .95rem;
+            margin-bottom: 28px;
+        }
+
+        .map-frame {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            height: 420px;
+        }
+
+        .map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ── Success toast ─────────────────────────── */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2D5A27;
+            color: #fff;
+            padding: 16px 26px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .4s ease;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(45, 90, 39, 0.35);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 900px) {
+            .info-cards-row {
+                grid-template-columns: 1fr;
+                margin-top: 0;
+                padding-top: 40px;
+            }
+
+            .contact-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .cform-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-wrap {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">Food Garden</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="reserve.html" class="btn btn-primary" style="padding:10px 20px;">Book a Table</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="contact-hero">
+        <div class="hero-inner">
+            <div class="contact-label"><i class="fas fa-comments"></i> Let's Talk</div>
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you. Whether it's a question, feedback, or just saying Namaste!</p>
+        </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-cards-row">
+        <div class="info-card">
+            <div class="info-card-icon icon-green"><i class="fas fa-map-marker-alt"></i></div>
+            <h3>Visit Us</h3>
+            <p>17, Lavelle Road<br>Ashok Nagar, Bengaluru<br>Karnataka 560001</p>
+        </div>
+        <div class="info-card">
+            <div class="info-card-icon icon-gold"><i class="fas fa-phone-alt"></i></div>
+            <h3>Call Us</h3>
+            <p><a href="tel:+918035216789">+91 80 3521 6789</a><br><br>
+                Mon–Sun &nbsp; 11:00 AM – 10:30 PM</p>
+        </div>
+        <div class="info-card">
+            <div class="info-card-icon icon-orange"><i class="fas fa-envelope-open-text"></i></div>
+            <h3>Email Us</h3>
+            <p><a href="mailto:hello@foodgarden.in">hello@foodgarden.in</a><br><br>
+                We respond within 24 hours</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="contact-main">
+
+        <!-- Sidebar: Hours + Social -->
+        <div class="contact-sidebar">
+            <h2>Come Dine With Us</h2>
+            <p>We're open all days of the week. Walk-ins welcome!</p>
+
+            <div class="hours-card">
+                <h4><i class="fas fa-clock"></i> Opening Hours</h4>
+                <div class="hour-row">
+                    <span>Monday – Friday</span>
+                    <span>11:00 AM – 10:30 PM</span>
+                </div>
+                <div class="hour-row">
+                    <span>Saturday</span>
+                    <span>10:00 AM – 11:00 PM</span>
+                </div>
+                <div class="hour-row">
+                    <span>Sunday</span>
+                    <span>10:00 AM – 11:00 PM</span>
+                </div>
+                <div class="hour-row">
+                    <span>Public Holidays</span>
+                    <span>12:00 PM – 9:00 PM</span>
+                </div>
+            </div>
+
+            <div class="social-card">
+                <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+                <div class="social-btns">
+                    <a href="#" class="social-btn"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrap">
+            <div class="form-head">
+                <h3>Send Us a Message</h3>
+                <p>Fill in the form and our team will get back to you within 24 hours.</p>
+            </div>
+
+            <form id="contactForm">
+                <div class="cform-row">
+                    <div class="cform-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" name="fullname" id="fullname" placeholder="e.g. Rohan Mehta" required>
+                    </div>
+                    <div class="cform-group">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <input type="tel" name="phone" id="phone" placeholder="+91 98765 43210">
+                    </div>
+                </div>
+
+                <div class="cform-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="topic-wrap">
+                    <div class="topic-label"><i class="fas fa-tag"></i> Topic</div>
+                    <div class="topic-pills">
+                        <span class="topic-pill" onclick="toggleTopic(this)">Reservation</span>
+                        <span class="topic-pill" onclick="toggleTopic(this)">Feedback</span>
+                        <span class="topic-pill" onclick="toggleTopic(this)">Bulk Order</span>
+                        <span class="topic-pill" onclick="toggleTopic(this)">Partnership</span>
+                        <span class="topic-pill" onclick="toggleTopic(this)">Other</span>
+                    </div>
+                </div>
+
+                <div class="cform-group">
+                    <label><i class="fas fa-comment-dots"></i> Your Message</label>
+                    <textarea name="message" id="message" placeholder="How can we help you? We'd love to hear from you..." required></textarea>
+                </div>
+
+                <button type="submit" class="send-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-wrap">
+        <h2>Find Us Here</h2>
+        <p>Right in the heart of Ashok Nagar, easy to find and even easier to love.</p>
+        <div class="map-frame">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sLavelle%20Rd%2C%20Ashok%20Nagar%2C%20Bengaluru!5e0!3m2!1sen!2sin!4v1711234567890"
+                allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" style="font-size:1.2rem;"></i>
+        Message sent! We'll get back to you shortly. 🙏
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function toggleTopic(el) {
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            const sendBtn = this.querySelector('.send-btn');
+            const originalBtnHTML = sendBtn.innerHTML;
+
+            // Get selected topic
+            const activeTopic = document.querySelector('.topic-pill.active');
+            const topic = activeTopic ? activeTopic.textContent : '';
+
+            // Collect form data
+            const data = {
+                fullname: document.getElementById('fullname').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                topic: topic,
+                message: document.getElementById('message').value
+            };
+
+            // Show loading state
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            sendBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/contacts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 4000);
+                    this.reset();
+                    document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (err) {
+                console.error('Contact form error:', err);
+                alert('Could not send message. Please check your connection and try again.');
+            } finally {
+                sendBtn.innerHTML = originalBtnHTML;
+                sendBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

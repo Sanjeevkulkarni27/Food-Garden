@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Food Garden</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* ── Hero ───────────────────────────────────── */
+        .about-hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(160deg, rgba(10, 25, 8, .90), rgba(120, 60, 0, .65)),
+                url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1600') center/cover fixed no-repeat;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #FDFBF7;
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 8%;
+            max-width: 800px;
+        }
+
+        .about-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 192, 45, .15);
+            border: 1px solid rgba(251, 192, 45, .5);
+            color: #FBC02D;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 7px 20px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+        }
+
+        .hero-content h1 em {
+            font-style: italic;
+            color: #FBC02D;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: .82;
+            line-height: 1.8;
+            max-width: 550px;
+            margin-bottom: 36px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn-primary {
+            padding: 15px 32px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .hero-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, .45);
+        }
+
+        .hero-btn-outline {
+            padding: 15px 32px;
+            border: 2px solid rgba(255, 255, 255, .5);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .hero-btn-outline:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        /* Scroll cue */
+        .scroll-cue {
+            position: absolute;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            color: rgba(255, 255, 255, .6);
+            font-size: .78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bob 2s ease-in-out infinite;
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px)
+            }
+        }
+
+        .scroll-cue i {
+            display: block;
+            font-size: 1.2rem;
+            margin-top: 6px;
+        }
+
+        /* ── Stats ──────────────────────────────────── */
+        .stats-wrap {
+            background: #2D5A27;
+            padding: 50px 5%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .stat-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #FBC02D;
+            margin-bottom: 6px;
+        }
+
+        .stat-box p {
+            font-size: .9rem;
+            opacity: .8;
+        }
+
+        /* ── Story ──────────────────────────────────── */
+        .story-wrap {
+            padding: 110px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-imgs {
+            position: relative;
+        }
+
+        .story-imgs .img-main {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+        }
+
+        .story-imgs .img-sub {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 6px solid #FDFBF7;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .2);
+        }
+
+        .gold-round {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background: #FBC02D;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: .82rem;
+            text-align: center;
+            color: #1A1A1A;
+            box-shadow: 0 8px 25px rgba(251, 192, 45, .45);
+        }
+
+        .gold-round span {
+            font-size: 1.8rem;
+            font-weight: 900;
+            display: block;
+        }
+
+        .story-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #2D5A27;
+            line-height: 1.2;
+            margin-bottom: 22px;
+        }
+
+        .story-text h2 em {
+            font-style: italic;
+            color: #D47B3A;
+        }
+
+        .story-text p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        .feature-pills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .fp {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f0e8;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: .9rem;
+            font-weight: 600;
+            color: #333;
+            border-left: 4px solid #2D5A27;
+        }
+
+        .fp i {
+            color: #2D5A27;
+        }
+
+        /* ── Timeline ───────────────────────────────── */
+        .timeline-section {
+            background: linear-gradient(135deg, #1A1A1A, #2D3A2A);
+            padding: 110px 5%;
+            color: #fff;
+            text-align: center;
+        }
+
+        .timeline-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #FBC02D;
+            margin-bottom: 10px;
+        }
+
+        .timeline-section>p {
+            color: #aaa;
+            margin-bottom: 70px;
+            font-size: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, .12);
+            transform: translateX(-50%);
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .tl-item:nth-child(odd) {
+            flex-direction: row;
+            text-align: right;
+        }
+
+        .tl-item:nth-child(even) {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+
+        .tl-content {
+            flex: 1;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 20px;
+            padding: 24px 28px;
+            transition: all .3s;
+        }
+
+        .tl-content:hover {
+            background: rgba(251, 192, 45, .07);
+            border-color: rgba(251, 192, 45, .3);
+        }
+
+        .tl-year {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            background: #FBC02D;
+            color: #1A1A1A;
+            font-weight: 900;
+            font-size: .85rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(251, 192, 45, .4);
+            margin-top: 6px;
+        }
+
+        .tl-content h4 {
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .tl-content p {
+            color: #aaa;
+            font-size: .88rem;
+            line-height: 1.6;
+        }
+
+        /* ── Values ─────────────────────────────────── */
+        .values-full {
+            padding: 110px 5%;
+            background: #FDFBF7;
+        }
+
+        .values-full .v-head {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .values-full .v-head h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #2D5A27;
+            margin-bottom: 10px;
+        }
+
+        .values-full .v-head p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .v-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .07);
+            transition: all .3s;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+        }
+
+        .v-card:hover {
+            transform: translateY(-10px);
+            border-color: #FBC02D;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+        }
+
+        .v-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #fff;
+            margin: 0 auto 22px;
+        }
+
+        .v-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #1A1A1A;
+            margin-bottom: 12px;
+        }
+
+        .v-card p {
+            color: #888;
+            font-size: .93rem;
+            line-height: 1.7;
+        }
+
+        /* ── Chef ───────────────────────────────────── */
+        .chef-full {
+            padding: 110px 5%;
+        }
+
+        .chef-full .c-head {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .chef-full .c-head h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #2D5A27;
+            margin-bottom: 10px;
+        }
+
+        .chef-full .c-head p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .chef-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .1);
+        }
+
+        .chef-photo {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chef-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s;
+        }
+
+        .chef-wrap:hover .chef-photo img {
+            transform: scale(1.04);
+        }
+
+        .chef-body {
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ch-tag {
+            display: inline-block;
+            background: rgba(45, 90, 39, .1);
+            color: #2D5A27;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 14px;
+        }
+
+        .chef-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .ch-role {
+            color: #D47B3A;
+            font-style: italic;
+            font-size: .95rem;
+            margin-bottom: 22px;
+        }
+
+        .ch-quote {
+            border-left: 4px solid #FBC02D;
+            padding-left: 20px;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 28px;
+        }
+
+        .ch-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ch-skill {
+            background: #f5f0e8;
+            color: #333;
+            font-size: .82rem;
+            font-weight: 600;
+            padding: 6px 15px;
+            border-radius: 50px;
+        }
+
+        /* ── Gallery (mosaic) ───────────────────────── */
+        .gallery-full {
+            padding: 110px 5%;
+            background: #FDFBF7;
+        }
+
+        .gallery-full .g-head {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .gallery-full .g-head h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #2D5A27;
+            margin-bottom: 10px;
+        }
+
+        .gallery-full .g-head p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .mosaic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 220px 220px;
+            gap: 14px;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .mosaic-item {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .mosaic-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s;
+        }
+
+        .mosaic-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .mosaic-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 90, 39, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            transition: background .3s;
+        }
+
+        .mosaic-item:hover .overlay {
+            background: rgba(45, 90, 39, .45);
+        }
+
+        .mosaic-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .mosaic-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        /* ── CTA ────────────────────────────────────── */
+        .about-cta {
+            margin: 0 5% 80px;
+            background: linear-gradient(135deg, #2D5A27, #1A3A18);
+            border-radius: 28px;
+            padding: 70px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .about-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #FBC02D;
+            margin-bottom: 14px;
+        }
+
+        .about-cta p {
+            color: rgba(255, 255, 255, .75);
+            max-width: 500px;
+            margin: 0 auto 36px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-white {
+            padding: 15px 36px;
+            background: #fff;
+            color: #2D5A27;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .cta-btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+        }
+
+        .cta-btn-ghost {
+            padding: 15px 36px;
+            border: 2px solid rgba(255, 255, 255, .4);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: all .3s;
+        }
+
+        .cta-btn-ghost:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media(max-width:900px) {
+            .story-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .story-imgs .img-sub {
+                display: none;
+            }
+
+            .stats-wrap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .tl-item,
+            .tl-item:nth-child(odd),
+            .tl-item:nth-child(even) {
+                flex-direction: row !important;
+                text-align: left !important;
+            }
+
+            .tl-year {
+                flex-shrink: 0;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .chef-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .chef-photo {
+                height: 300px;
+            }
+
+            .mosaic {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .mosaic-item:first-child {
+                grid-column: span 2;
+                grid-row: span 1;
+                height: 240px;
+            }
+
+            .mosaic-item:nth-child(4) {
+                grid-column: span 1;
+            }
+        }
+
+        @media(max-width:600px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-pills {
+                grid-template-columns: 1fr;
+            }
+
+            .mosaic {
+                grid-template-columns: 1fr;
+            }
+
+            .mosaic-item:first-child {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">Food Garden</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reserve.html" class="btn btn-primary" style="padding:10px 20px;">Book a Table</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <!-- Full Viewport Hero -->
+    <div class="about-hero">
+        <div class="hero-content">
+            <div class="about-badge"><i class="fas fa-leaf"></i> Est. 2010 · Ashok Nagar, Bengaluru</div>
+            <h1>A Restaurant Born<br>from <em>Passion & Spice</em></h1>
+            <p>Food Garden is our love letter to India's extraordinary culinary heritage — rooted in tradition, grown
+                with organic care, and served with heart.</p>
+            <div class="hero-actions">
+                <a href="menu.html" class="hero-btn-primary"><i class="fas fa-utensils"></i> &nbsp;Explore Menu</a>
+                <a href="reserve.html" class="hero-btn-outline"><i class="fas fa-calendar-alt"></i> &nbsp;Book a
+                    Table</a>
+            </div>
+        </div>
+        <div class="scroll-cue">Scroll to explore <i class="fas fa-chevron-down"></i></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-wrap">
+        <div class="stat-box">
+            <h3 class="count-up" data-target="14">0</h3>
+            <p>Years of Authentic Flavours</p>
+        </div>
+        <div class="stat-box">
+            <h3 class="count-up" data-target="80">0</h3>
+            <p>Dishes on Our Menu</p>
+        </div>
+        <div class="stat-box">
+            <h3 class="count-up" data-target="50000">0</h3>
+            <p>Happy Guests Served</p>
+        </div>
+        <div class="stat-box">
+            <h3 class="count-up" data-target="100">0</h3>
+            <p>% Farm-Fresh Ingredients</p>
+        </div>
+    </div>
+
+    <!-- Our Story -->
+    <section class="story-wrap">
+        <div class="story-imgs">
+            <div class="gold-round"><span>🏆</span>Award<br>Winning</div>
+            <img class="img-main"
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800"
+                alt="Our Kitchen">
+            <img class="img-sub"
+                src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=400"
+                alt="Spices">
+        </div>
+        <div class="story-text">
+            <h2>A Tribute to India's <em>Culinary Soul</em></h2>
+            <p>Food Garden was born from a single idea: that the best Indian food is inseparable from the land it comes
+                from — its soil, its seasons, and its stories passed down through generations.</p>
+            <p>From the ghee-laden kitchens of Punjab to the coconut forests of Kerala, we bring the full spectrum of
+                Indian regional cooking to your plate, enriched by the freshness of our own organic garden.</p>
+            <div class="feature-pills">
+                <div class="fp"><i class="fas fa-seedling"></i> Organic Garden</div>
+                <div class="fp"><i class="fas fa-fire-alt"></i> Wood-fire Tandoor</div>
+                <div class="fp"><i class="fas fa-leaf"></i> No Artificial Additives</div>
+                <div class="fp"><i class="fas fa-map-marker-alt"></i> Local Sourcing Only</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <h2>Our Journey</h2>
+        <p>From a humble kitchen dream to a beloved Bengaluru institution.</p>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-content">
+                    <h4>The Beginning</h4>
+                    <p>Chef Arjun Nair opens Food Garden as a 20-seat café in Ashok Nagar with 12 dishes and a dream.
+                    </p>
+                </div>
+                <div class="tl-year">2010</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-content">
+                    <h4>First Award</h4>
+                    <p>Recognized by Bengaluru Times as one of the "Top 10 Authentic Indian Restaurants" in the city.
+                    </p>
+                </div>
+                <div class="tl-year">2013</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-content">
+                    <h4>The Garden Expansion</h4>
+                    <p>We open an organic garden adjacent to the restaurant, supplying 60% of all herbs and vegetables.
+                    </p>
+                </div>
+                <div class="tl-year">2016</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-content">
+                    <h4>50,000 Guests Milestone</h4>
+                    <p>We celebrate serving our 50,000th guest and expand to a 120-seat garden restaurant.</p>
+                </div>
+                <div class="tl-year">2024</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-full">
+        <div class="v-head">
+            <h2>What We Stand For</h2>
+            <p>Three pillars that guide every dish we serve.</p>
+        </div>
+        <div class="values-grid">
+            <div class="v-card">
+                <div class="v-icon"><i class="fas fa-mortar-pestle"></i></div>
+                <h3>Authentic Recipes</h3>
+                <p>Sourced from regional Indian kitchens — from the ghee-laden gravies of Punjab to the coconut-kissed
+                    curries of Kerala.</p>
+            </div>
+            <div class="v-card">
+                <div class="v-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Fresh & Seasonal</h3>
+                <p>Our in-house garden supplies herbs, greens & edible flowers year-round. We change our menu with the
+                    seasons.</p>
+            </div>
+            <div class="v-card">
+                <div class="v-icon"><i class="fas fa-heart"></i></div>
+                <h3>Cooked with Love</h3>
+                <p>Every plate carries the care and pride of our chefs, who treat cooking as a craft, not a production
+                    line.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chef -->
+    <section class="chef-full">
+        <div class="c-head">
+            <h2>Meet Our Chef</h2>
+            <p>The visionary behind our seasonal Indian kitchen.</p>
+        </div>
+        <div class="chef-wrap">
+            <div class="chef-photo">
+                <img src="assets/images/chef.png" alt="Chef Arjun Nair">
+            </div>
+            <div class="chef-body">
+                <span class="ch-tag">Executive Chef & Co-Founder</span>
+                <h3>Chef Arjun Nair</h3>
+                <p class="ch-role">14 Years · Bengaluru's Finest Indian Kitchen</p>
+                <p class="ch-quote">"My kitchen is an extension of the garden. We don't just cook — we collaborate with
+                    nature, tradition, and the farmers who feed us to bring the most vibrant Indian flavours to your
+                    table."</p>
+                <div class="ch-skills">
+                    <span class="ch-skill">🍖 Mughlai Cuisine</span>
+                    <span class="ch-skill">🥥 South Indian</span>
+                    <span class="ch-skill">🔥 Tandoor Specialist</span>
+                    <span class="ch-skill">🌿 Farm-to-Table</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery (mosaic) -->
+    <section class="gallery-full">
+        <div class="g-head">
+            <h2>Our Space</h2>
+            <p>A warm, welcoming escape in the heart of Ashok Nagar.</p>
+        </div>
+        <div class="mosaic">
+            <div class="mosaic-item">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900"
+                    alt="Main Hall">
+                <div class="overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="mosaic-item">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600"
+                    alt="Kitchen">
+                <div class="overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="mosaic-item">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=600"
+                    alt="Garden Seating">
+                <div class="overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="mosaic-item">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=700"
+                    alt="Spice Wall">
+                <div class="overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="mosaic-item">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=600"
+                    alt="Fine Dining">
+                <div class="overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="about-cta">
+        <h2>Come Experience Food Garden</h2>
+        <p>Taste the difference that 14 years of passion, tradition, and organic gardening can make.</p>
+        <div class="cta-btns">
+            <a href="reserve.html" class="cta-btn-white"><i class="fas fa-calendar-alt"></i> &nbsp;Book a Table</a>
+            <a href="menu.html" class="cta-btn-ghost"><i class="fas fa-utensils"></i> &nbsp;View Our Menu</a>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="js/main.js"></script>
+    <script>
+        // Animated counter
+        const counters = document.querySelectorAll('.count-up');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const end = +el.dataset.target;
+                const isLarge = end >= 1000;
+                let current = 0;
+                const step = Math.ceil(end / 80);
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, end);
+                    el.textContent = isLarge
+                        ? (current >= 1000 ? Math.floor(current / 1000) + 'K+' : current)
+                        : current + (el.dataset.target === '100' ? '%' : '+');
+                    if (current >= end) clearInterval(timer);
+                }, 20);
+                observer.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+    </script>
+</body>
+
+</html>

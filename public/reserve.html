@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table | Food Garden</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FDFBF7;
+            color: #1A1A1A;
+            min-height: 100vh;
+        }
+
+        /* ── Page Layout ─────────────────────────── */
+        .reserve-page {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 70px);
+            padding-top: 80px;
+        }
+
+        /* ── Left Panel ──────────────────────────── */
+        .reserve-left {
+            position: relative;
+            background: linear-gradient(160deg, rgba(20, 10, 5, 0.92), rgba(100, 40, 0, 0.75)),
+                url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=900');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 55px;
+            overflow: hidden;
+        }
+
+        .reserve-left::after {
+            content: '🍛';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.04;
+            bottom: -60px;
+            right: -60px;
+            transform: rotate(-15deg);
+        }
+
+        .reserve-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 192, 45, 0.15);
+            border: 1px solid rgba(251, 192, 45, 0.4);
+            color: #FBC02D;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 7px 18px;
+            border-radius: 50px;
+            margin-bottom: 28px;
+            width: fit-content;
+        }
+
+        .reserve-left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .reserve-left h1 em {
+            font-style: italic;
+            color: #FBC02D;
+        }
+
+        .reserve-left>p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        /* Perks */
+        .perks {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .perk {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .perk-icon {
+            width: 46px;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #FBC02D;
+            flex-shrink: 0;
+        }
+
+        .perk-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .perk-text p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Rating strip */
+        .rating-strip {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rating-avatars {
+            display: flex;
+        }
+
+        .rating-avatars img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #0e0e0e;
+            margin-left: -10px;
+            object-fit: cover;
+        }
+
+        .rating-avatars img:first-child {
+            margin-left: 0;
+        }
+
+        .rating-text p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .rating-text strong {
+            color: #FBC02D;
+        }
+
+        .stars {
+            color: #FBC02D;
+            font-size: .8rem;
+        }
+
+        /* ── Right Panel (Form) ───────────────────── */
+        .reserve-right {
+            background: #f8f5f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 55px;
+        }
+
+        .reserve-form-wrap {
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .form-title {
+            margin-bottom: 36px;
+        }
+
+        .form-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #1A1A1A;
+            margin-bottom: 6px;
+        }
+
+        .form-title p {
+            color: #777;
+            font-size: .95rem;
+        }
+
+        /* Step tabs */
+        .form-steps {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e0d8cc;
+        }
+
+        .step-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: #999;
+            background: #fff;
+            cursor: pointer;
+            border: none;
+            transition: all .25s;
+        }
+
+        .step-tab.active {
+            background: var(--primary, #2D5A27);
+            color: #fff;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            font-size: .72rem;
+            margin-right: 6px;
+        }
+
+        .step-tab:not(.active) .step-num {
+            background: #eee;
+            color: #555;
+        }
+
+        /* Form fields */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group label i {
+            color: #2D5A27;
+            font-size: .85rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #e0d8cc;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: .95rem;
+            color: #1A1A1A;
+            background: #fff;
+            transition: border-color .25s, box-shadow .25s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2D5A27;
+            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Occasion pills */
+        .occasion-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .occasion-pill {
+            padding: 8px 16px;
+            border: 1.5px solid #e0d8cc;
+            border-radius: 50px;
+            font-size: .82rem;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            background: #fff;
+            transition: all .2s;
+            user-select: none;
+        }
+
+        .occasion-pill:hover,
+        .occasion-pill.selected {
+            border-color: #2D5A27;
+            background: #2D5A27;
+            color: #fff;
+        }
+
+        .occasion-label {
+            font-size: .85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .occasion-label i {
+            color: #2D5A27;
+        }
+
+        /* Submit btn */
+        .reserve-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            letter-spacing: .5px;
+            transition: all .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, 0.35);
+        }
+
+        .reserve-btn i {
+            font-size: 1rem;
+        }
+
+        /* Privacy note */
+        .privacy-note {
+            text-align: center;
+            font-size: .78rem;
+            color: #aaa;
+            margin-top: 14px;
+        }
+
+        .privacy-note i {
+            margin-right: 5px;
+        }
+
+        /* ── Success Modal ────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 28px;
+            padding: 55px 45px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            animation: popIn .4s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 24px;
+        }
+
+        .modal-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+
+        .modal-box p {
+            color: #777;
+            font-size: .95rem;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .modal-close {
+            background: #2D5A27;
+            color: #fff;
+            border: none;
+            padding: 13px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: .95rem;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .modal-close:hover {
+            background: #4CAF50;
+        }
+
+        /* ── Responsive ───────────────────────────── */
+        @media (max-width: 900px) {
+            .reserve-page {
+                grid-template-columns: 1fr;
+            }
+
+            .reserve-left {
+                padding: 50px 30px;
+                min-height: 45vh;
+            }
+
+            .reserve-right {
+                padding: 40px 24px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">Food Garden</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reserve.html" class="active btn btn-primary" style="padding:10px 20px;">Book a Table</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+
+    <div class="reserve-page">
+
+        <!-- ── Left Info Panel ── -->
+        <div class="reserve-left">
+            <div class="reserve-badge"><i class="fas fa-utensils"></i> Food Garden · Ashok Nagar</div>
+            <h1>Reserve Your<br><em>Perfect Table</em></h1>
+            <p>Experience the finest Indian flavours in a warm, garden-inspired setting. Book your table in under 2
+                minutes.</p>
+
+            <div class="perks">
+                <div class="perk">
+                    <div class="perk-icon"><i class="fas fa-clock"></i></div>
+                    <div class="perk-text">
+                        <h4>Instant Confirmation</h4>
+                        <p>Get a confirmation SMS & email within seconds.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon"><i class="fas fa-times-circle"></i></div>
+                    <div class="perk-text">
+                        <h4>Free Cancellation</h4>
+                        <p>Cancel or modify up to 2 hours before your booking.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon"><i class="fas fa-star"></i></div>
+                    <div class="perk-text">
+                        <h4>Special Occasion Perks</h4>
+                        <p>Let us know — we'll make it unforgettable.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="perk-text">
+                        <h4>Indoor & Garden Seating</h4>
+                        <p>Choose from air-conditioned or open-air dining.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rating-strip">
+                <div class="rating-avatars">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                </div>
+                <div class="rating-text">
+                    <div class="stars">★★★★★</div>
+                    <p><strong>4.9 / 5</strong> from 2,000+ verified guests</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Right Form Panel ── -->
+        <div class="reserve-right">
+            <div class="reserve-form-wrap">
+                <div class="form-title">
+                    <h2>Make a Reservation</h2>
+                    <p>Fill in the details below and we'll take care of the rest.</p>
+                </div>
+
+                <div class="form-steps">
+                    <div class="step-tab active"><span class="step-num">1</span> Your Info</div>
+                    <div class="step-tab active"><span class="step-num">2</span> When &amp; Who</div>
+                    <div class="step-tab active"><span class="step-num">3</span> Preferences</div>
+                </div>
+
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="fullname"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="e.g. Priya Sharma" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date"><i class="fas fa-calendar-alt"></i> Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time"><i class="fas fa-clock"></i> Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guests"><i class="fas fa-users"></i> Guests</label>
+                            <select id="guests" name="guests" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="1">1 Person</option>
+                                <option value="2">2 People</option>
+                                <option value="3">3 People</option>
+                                <option value="4">4 People</option>
+                                <option value="5">5 People</option>
+                                <option value="6+">6+ People</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="seating"><i class="fas fa-chair"></i> Seating</label>
+                            <select id="seating" name="seating">
+                                <option value="indoor">Indoor (AC)</option>
+                                <option value="outdoor">Garden Seating</option>
+                                <option value="any">No Preference</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="occasion-label"><i class="fas fa-glass-cheers"></i> Occasion (optional)</div>
+                        <div class="occasion-pills">
+                            <span class="occasion-pill" onclick="togglePill(this)">🎂 Birthday</span>
+                            <span class="occasion-pill" onclick="togglePill(this)">💍 Anniversary</span>
+                            <span class="occasion-pill" onclick="togglePill(this)">💼 Business Lunch</span>
+                            <span class="occasion-pill" onclick="togglePill(this)">🎉 Celebration</span>
+                            <span class="occasion-pill" onclick="togglePill(this)">❤️ Date Night</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments"><i class="fas fa-comment-dots"></i> Special Requests</label>
+                        <textarea id="comments" name="comments"
+                            placeholder="Allergies, dietary needs, high chair, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="reserve-btn">
+                        <i class="fas fa-check-circle"></i> Confirm My Reservation
+                    </button>
+                    <p class="privacy-note"><i class="fas fa-lock"></i> Your details are safe with us. No spam, ever.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box">
+            <div class="modal-icon">🎉</div>
+            <h3>You're All Set!</h3>
+            <p>Your table has been reserved. A confirmation has been sent to your email & phone. We can't wait to
+                welcome you!</p>
+            <button class="modal-close"
+                onclick="document.getElementById('successModal').classList.remove('show'); window.location='index.html'">Back
+                to Home</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/reservation.js"></script>
+    <script>
+        function togglePill(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Set min date to today
+        const dateInput = document.getElementById('date');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Food Garden</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* ── Hero ─────────────────────────────────── */
+        .menu-hero {
+            position: relative;
+            height: 60vh;
+            background: linear-gradient(160deg, rgba(10, 25, 10, 0.88), rgba(80, 40, 0, 0.65)),
+                url('assets/images/menu-bg.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .menu-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--bg-cream, #FDFBF7);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        .menu-hero-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 192, 45, .15);
+            border: 1px solid rgba(251, 192, 45, .45);
+            color: #FBC02D;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+        }
+
+        .menu-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 12px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, .5);
+        }
+
+        .menu-hero p {
+            font-size: 1.05rem;
+            opacity: .82;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ── Filter Tabs ───────────────────────────── */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 50px 5% 30px;
+        }
+
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: 50px;
+            border: 1.5px solid #ddd;
+            background: #fff;
+            color: #555;
+            font-weight: 600;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: all .25s;
+        }
+
+        .filter-btn i {
+            font-size: .85rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #2D5A27;
+            border-color: #2D5A27;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(45, 90, 39, .25);
+        }
+
+        /* ── Section heading ───────────────────────── */
+        .cat-heading {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .cat-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #2D5A27;
+            position: relative;
+            display: inline-block;
+        }
+
+        .cat-heading h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #FBC02D, transparent);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .cat-heading p {
+            color: #888;
+            margin-top: 8px;
+            font-size: .95rem;
+        }
+
+        /* ── Dish Card ─────────────────────────────── */
+        .menu-section {
+            padding: 0 5% 80px;
+        }
+
+        .menu-cat {
+            margin-bottom: 80px;
+        }
+
+        .dish-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .dish-card-new {
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
+            transition: transform .3s ease, box-shadow .3s ease;
+            position: relative;
+        }
+
+        .dish-card-new:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .15);
+        }
+
+        .dish-img-new {
+            height: 230px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dish-img-new img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .dish-card-new:hover .dish-img-new img {
+            transform: scale(1.08);
+        }
+
+        /* Badge overlays */
+        .dish-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .badge-veg {
+            background: #e8f5e9;
+            color: #2D5A27;
+        }
+
+        .badge-spicy {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-chef {
+            background: #FBC02D;
+            color: #1A1A1A;
+        }
+
+        .badge-new {
+            background: #ede7f6;
+            color: #6a1b9a;
+        }
+
+        /* Favourite heart */
+        .fav-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, .9);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ccc;
+            font-size: 1rem;
+            transition: all .25s;
+        }
+
+        .fav-btn:hover {
+            color: #e53935;
+            transform: scale(1.15);
+        }
+
+        .fav-btn.faved {
+            color: #e53935;
+        }
+
+        .dish-body {
+            padding: 22px;
+        }
+
+        .dish-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #1A1A1A;
+            margin-bottom: 7px;
+        }
+
+        .dish-body p {
+            font-size: .88rem;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .dish-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .d-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2D5A27;
+        }
+
+        .add-btn {
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: .85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all .25s;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 14px rgba(45, 90, 39, .35);
+        }
+
+        /* ── CTA Banner ────────────────────────────── */
+        .menu-cta {
+            margin: 0 5% 80px;
+            background: linear-gradient(135deg, #1A1A1A, #2D3A2A);
+            border-radius: 28px;
+            padding: 55px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+            color: #fff;
+        }
+
+        .menu-cta-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #FBC02D;
+            margin-bottom: 10px;
+        }
+
+        .menu-cta-text p {
+            color: #aaa;
+            max-width: 450px;
+            line-height: 1.7;
+        }
+
+        .cta-book-btn {
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #2D5A27, #4CAF50);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 90, 39, .45);
+        }
+
+        /* ── Responsive ───────────────────────────── */
+        @media (max-width: 700px) {
+            .menu-cta {
+                text-align: center;
+                justify-content: center;
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">Food Garden</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reserve.html" class="btn btn-primary" style="padding:10px 20px;">Book a Table</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+
+    <!-- Hero -->
+    <div class="menu-hero">
+        <div class="menu-hero-inner">
+            <div class="menu-badge"><i class="fas fa-utensils"></i> Authentic Indian Kitchen</div>
+            <h1>Our Menu</h1>
+            <p>Every dish is a journey across India's rich culinary regions — fresh, bold, and unforgettable.</p>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterMenu('all', this)"><i class="fas fa-th"></i> All
+            Dishes</button>
+        <button class="filter-btn" onclick="filterMenu('starters', this)"><i class="fas fa-pepper-hot"></i> Chaat &
+            Starters</button>
+        <button class="filter-btn" onclick="filterMenu('mains', this)"><i class="fas fa-drumstick-bite"></i> Main
+            Course</button>
+        <button class="filter-btn" onclick="filterMenu('tandoor', this)"><i class="fas fa-fire-alt"></i> Tandoor &
+            Breads</button>
+        <button class="filter-btn" onclick="filterMenu('desserts', this)"><i class="fas fa-ice-cream"></i> Indian
+            Sweets</button>
+    </div>
+
+    <div class="menu-section">
+
+        <!-- Starters -->
+        <div class="menu-cat" id="cat-starters">
+            <div class="cat-heading">
+                <h2>🌶 Chaat & Starters</h2>
+                <p>Crispy, tangy & bursting with street-food energy</p>
+            </div>
+            <div class="dish-grid-new">
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/samosa.png" alt="Samosa">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-chef">⭐ Chef's Pick</span></div>
+
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Artisanal Garden Samosas</h3>
+                        <p>Crispy pastry filled with organic potatoes & peas, served with fresh garden mint chutney.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹180</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/dahi_papdi.png" alt="Dahi Papdi">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-new">✨ New</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Dahi Papdi Chaat</h3>
+                        <p>Crisp wafers with whipped yogurt, tamarind chutney & a rainbow of garden coriander.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹220</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/paneer_tikka.png" alt="Paneer Tikka">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-spicy">🌶 Spicy</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Garden Fresh Paneer Tikka</h3>
+                        <p>Smoky tandoor-charred cottage cheese with garden bell peppers & homemade masala.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹320</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mains -->
+        <div class="menu-cat" id="cat-mains">
+            <div class="cat-heading">
+                <h2>🍛 Main Course</h2>
+                <p>Rich gravies & hearty curries slow-cooked to perfection</p>
+            </div>
+            <div class="dish-grid-new">
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/dal_makhani.png" alt="Dal Makhani">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-chef">⭐ Chef's Pick</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Signature Dal Makhani</h3>
+                        <p>Black lentils slow-cooked overnight with ginger, garlic & home-churned butter.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹420</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/butter_chicken.png" alt="Butter Chicken">
+                        <div class="dish-badge"><span class="badge badge-spicy">🌶 Medium</span><span
+                                class="badge badge-chef">⭐ Bestseller</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Old Delhi Butter Chicken</h3>
+                        <p>Tender chicken in a velvety tomato-cream sauce with fragrant whole spices.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹580</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/biryani.png" alt="Biryani">
+                        <div class="dish-badge"><span class="badge badge-chef">⭐ Signature</span><span
+                                class="badge badge-spicy">🌶 Spicy</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Garden Signature Biryani</h3>
+                        <p>Long-grain basmati rice layered with saffron, whole spices & your choice of protein.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹650</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tandoor & Breads -->
+        <div class="menu-cat" id="cat-tandoor">
+            <div class="cat-heading">
+                <h2>🔥 Tandoor & Breads</h2>
+                <p>From our traditional clay oven — charred, smoky & irresistible</p>
+            </div>
+            <div class="dish-grid-new">
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/naan.png" alt="Naan">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Garlic Butter Naan</h3>
+                        <p>Freshly baked fluffy bread brushed with garden-herb garlic butter straight from the tandoor.
+                        </p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹90</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/tandoori_chicken.png" alt="Tandoori Chicken">
+                        <div class="dish-badge"><span class="badge badge-spicy">🌶 Hot</span><span
+                                class="badge badge-chef">⭐ Chef's Pick</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Tandoori Chicken Half</h3>
+                        <p>Marinated overnight in yogurt & spices, roasted in our clay oven for the perfect char.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹480</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-cat" id="cat-desserts">
+            <div class="cat-heading">
+                <h2>🍮 Indian Sweets</h2>
+                <p>Traditional mithai & modern desserts to end on a sweet note</p>
+            </div>
+            <div class="dish-grid-new">
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/gulab_jamun.png" alt="Gulab Jamun">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-chef">⭐ Bestseller</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Saffron Gulab Jamun</h3>
+                        <p>Warm milk dumplings soaked in rose & saffron-infused garden honey syrup.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹150</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card-new">
+                    <div class="dish-img-new">
+                        <img src="./assets/images/generated/kulfi.png" alt="Kulfi">
+                        <div class="dish-badge"><span class="badge badge-veg">🟢 Veg</span><span
+                                class="badge badge-new">✨ New</span></div>
+
+                    </div>
+                    <div class="dish-body">
+                        <h3>Pistachio Rose Kulfi</h3>
+                        <p>Creamy frozen kulfi infused with rose water & topped with crushed pistachios and falooda.</p>
+                        <div class="dish-footer">
+                            <span class="d-price">₹180</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="menu-cta">
+        <div class="menu-cta-text">
+            <h3>Ready to Dine with Us?</h3>
+            <p>Book a table and experience our full menu in the warmth of our garden restaurant. We'd love to welcome
+                you.</p>
+        </div>
+        <a href="reserve.html" class="cta-book-btn"><i class="fas fa-calendar-alt"></i> &nbsp;Book a Table</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="js/main.js"></script>
+    <script>
+        function filterMenu(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.menu-cat').forEach(c => {
+                c.style.display = (cat === 'all' || c.id === 'cat-' + cat) ? 'block' : 'none';
+            });
+        }
+        function toggleFav(btn) {
+            btn.classList.toggle('faved');
+            btn.querySelector('i').style.color = btn.classList.contains('faved') ? '#e53935' : '#ccc';
+        }
+    </script>
+</body>
+
+</html>
