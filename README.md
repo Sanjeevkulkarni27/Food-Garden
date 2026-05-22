@@ -7,6 +7,30 @@ A full-stack restaurant management platform built with **Node.js**, **Express**,
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
+🔗 **Live Demo:** [food-garden.vercel.app](https://food-garden.vercel.app)
+
+---
+
+## 📸 Screenshots
+
+### Homepage
+![Homepage](screenshots/homepage.png)
+
+### Menu
+![Menu](screenshots/menu.png)
+
+### About
+![About](screenshots/about.png)
+
+### Reserve a Table
+![Reserve](screenshots/reserve.png)
+
+### Contact
+![Contact](screenshots/contact.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin.png)
+
 ---
 
 ## ✨ Features
@@ -36,7 +60,7 @@ A full-stack restaurant management platform built with **Node.js**, **Express**,
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/Food-Garden.git
+git clone https://github.com/Sanjeevkulkarni27/Food-Garden.git
 cd Food-Garden
 
 # 2. Install dependencies
