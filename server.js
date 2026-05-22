@@ -13,7 +13,6 @@ const menuRoutes = require('./routes/menu');
 
 // ─── Create Express App ─────────────────────────────────────────────────────
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // ─── Middleware ──────────────────────────────────────────────────────────────
 
@@ -121,10 +120,27 @@ app.get('*', (req, res) => {
 });
 
 // ─── Start Server ────────────────────────────────────────────────────────────
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`\n🌿 Food Garden server is running!`);
-    console.log(`🌐 http://localhost:${PORT}`);
-    console.log(`📡 API available at http://localhost:${PORT}/api\n`);
-  });
+// Connect to DB on first request (works for both local and serverless)
+let isConnected = false;
+app.use(async (req, res, next) => {
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+  }
+  next();
 });
+
+// Local development: start listening
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`\n🌿 Food Garden server is running!`);
+      console.log(`🌐 http://localhost:${PORT}`);
+      console.log(`📡 API available at http://localhost:${PORT}/api\n`);
+    });
+  });
+}
+
+// Export for Vercel serverless
+module.exports = app;
