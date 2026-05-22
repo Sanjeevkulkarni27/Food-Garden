@@ -26,13 +26,20 @@ app.use(express.json());
 // Parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
+// Trust proxy in production (Render uses reverse proxy)
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 // Session middleware for admin authentication
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'dev-fallback-secret',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000  // 24 hours
+    maxAge: 24 * 60 * 60 * 1000,  // 24 hours
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax'
   }
 }));
 
